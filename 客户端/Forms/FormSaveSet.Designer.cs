@@ -23,95 +23,98 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
-			this.checkBox2 = new System.Windows.Forms.CheckBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.SavePicture = new System.Windows.Forms.CheckBox();
+			this.AutoDeletion = new System.Windows.Forms.CheckBox();
+			this.AutoDeletionDay = new System.Windows.Forms.TextBox();
+			this.PicturePath = new System.Windows.Forms.TextBox();
 			this.button1 = new System.Windows.Forms.Button();
-			this.checkBox3 = new System.Windows.Forms.CheckBox();
-			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.SaveData = new System.Windows.Forms.CheckBox();
+			this.DataPath = new System.Windows.Forms.TextBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
-			// checkBox1
+			// SavePicture
 			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.checkBox1.Location = new System.Drawing.Point(76, 82);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(129, 28);
-			this.checkBox1.TabIndex = 1;
-			this.checkBox1.Text = "保存图片";
-			this.checkBox1.UseVisualStyleBackColor = true;
+			this.SavePicture.AutoSize = true;
+			this.SavePicture.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.SavePicture.Location = new System.Drawing.Point(76, 82);
+			this.SavePicture.Name = "SavePicture";
+			this.SavePicture.Size = new System.Drawing.Size(129, 28);
+			this.SavePicture.TabIndex = 1;
+			this.SavePicture.Text = "保存图片";
+			this.SavePicture.UseVisualStyleBackColor = true;
 			// 
-			// checkBox2
+			// AutoDeletion
 			// 
-			this.checkBox2.AutoSize = true;
-			this.checkBox2.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.checkBox2.Location = new System.Drawing.Point(270, 81);
-			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(129, 28);
-			this.checkBox2.TabIndex = 2;
-			this.checkBox2.Text = "自动删除";
-			this.checkBox2.UseVisualStyleBackColor = true;
+			this.AutoDeletion.AutoSize = true;
+			this.AutoDeletion.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.AutoDeletion.Location = new System.Drawing.Point(270, 81);
+			this.AutoDeletion.Name = "AutoDeletion";
+			this.AutoDeletion.Size = new System.Drawing.Size(129, 28);
+			this.AutoDeletion.TabIndex = 2;
+			this.AutoDeletion.Text = "自动删除";
+			this.AutoDeletion.UseVisualStyleBackColor = true;
 			// 
-			// textBox1
+			// AutoDeletionDay
 			// 
-			this.textBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.textBox1.Location = new System.Drawing.Point(418, 80);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(163, 30);
-			this.textBox1.TabIndex = 3;
+			this.AutoDeletionDay.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.AutoDeletionDay.Location = new System.Drawing.Point(418, 80);
+			this.AutoDeletionDay.Name = "AutoDeletionDay";
+			this.AutoDeletionDay.Size = new System.Drawing.Size(163, 30);
+			this.AutoDeletionDay.TabIndex = 3;
+			this.AutoDeletionDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
-			// textBox2
+			// PicturePath
 			// 
-			this.textBox2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.textBox2.Location = new System.Drawing.Point(197, 135);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(370, 30);
-			this.textBox2.TabIndex = 4;
+			this.PicturePath.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.PicturePath.Location = new System.Drawing.Point(197, 135);
+			this.PicturePath.Name = "PicturePath";
+			this.PicturePath.Size = new System.Drawing.Size(370, 30);
+			this.PicturePath.TabIndex = 4;
 			// 
 			// button1
 			// 
 			this.button1.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.button1.Location = new System.Drawing.Point(573, 136);
+			this.button1.Location = new System.Drawing.Point(580, 139);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(76, 30);
+			this.button1.Size = new System.Drawing.Size(60, 31);
 			this.button1.TabIndex = 5;
 			this.button1.Text = "...";
 			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
-			// checkBox3
+			// SaveData
 			// 
-			this.checkBox3.AutoSize = true;
-			this.checkBox3.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.checkBox3.Location = new System.Drawing.Point(76, 246);
-			this.checkBox3.Name = "checkBox3";
-			this.checkBox3.Size = new System.Drawing.Size(129, 28);
-			this.checkBox3.TabIndex = 6;
-			this.checkBox3.Text = "保存数据";
-			this.checkBox3.UseVisualStyleBackColor = true;
+			this.SaveData.AutoSize = true;
+			this.SaveData.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.SaveData.Location = new System.Drawing.Point(76, 246);
+			this.SaveData.Name = "SaveData";
+			this.SaveData.Size = new System.Drawing.Size(129, 28);
+			this.SaveData.TabIndex = 6;
+			this.SaveData.Text = "保存数据";
+			this.SaveData.UseVisualStyleBackColor = true;
 			// 
-			// textBox3
+			// DataPath
 			// 
-			this.textBox3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.textBox3.Location = new System.Drawing.Point(188, 297);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(370, 30);
-			this.textBox3.TabIndex = 7;
+			this.DataPath.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.DataPath.Location = new System.Drawing.Point(188, 297);
+			this.DataPath.Name = "DataPath";
+			this.DataPath.Size = new System.Drawing.Size(370, 30);
+			this.DataPath.TabIndex = 7;
 			// 
 			// button2
 			// 
 			this.button2.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.button2.Location = new System.Drawing.Point(564, 298);
+			this.button2.Location = new System.Drawing.Point(580, 298);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(76, 30);
+			this.button2.Size = new System.Drawing.Size(60, 29);
 			this.button2.TabIndex = 8;
 			this.button2.Text = "...";
 			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// label1
 			// 
@@ -152,15 +155,17 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.button2);
-			this.Controls.Add(this.textBox3);
-			this.Controls.Add(this.checkBox3);
+			this.Controls.Add(this.DataPath);
+			this.Controls.Add(this.SaveData);
 			this.Controls.Add(this.button1);
-			this.Controls.Add(this.textBox2);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.checkBox2);
-			this.Controls.Add(this.checkBox1);
+			this.Controls.Add(this.PicturePath);
+			this.Controls.Add(this.AutoDeletionDay);
+			this.Controls.Add(this.AutoDeletion);
+			this.Controls.Add(this.SavePicture);
 			this.Name = "FormSaveSet";
 			this.Text = "FormSaveSet";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSaveSet_FormClosing);
+			this.Load += new System.EventHandler(this.FormSaveSet_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -168,13 +173,13 @@
 
 		#endregion
 
-		private System.Windows.Forms.CheckBox checkBox1;
-		private System.Windows.Forms.CheckBox checkBox2;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.TextBox textBox2;
+		private System.Windows.Forms.CheckBox SavePicture;
+		private System.Windows.Forms.CheckBox AutoDeletion;
+		private System.Windows.Forms.TextBox AutoDeletionDay;
+		private System.Windows.Forms.TextBox PicturePath;
 		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.CheckBox checkBox3;
-		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.CheckBox SaveData;
+		private System.Windows.Forms.TextBox DataPath;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;

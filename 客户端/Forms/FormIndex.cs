@@ -100,7 +100,24 @@ namespace 客户端 {
 			timer1.Start();
 			#endregion
 
+			#region ！！！检测自动删除图片状态，保存图片，数据的状态及其目录的创建
+			if ( Ini.IniAPI.GetPrivateProfileString("Status" , "SavePicture" , "" , iniFilePath).Contains("true") ) {
+				//检测保存图片的目录是否创建
+				//检测自动删除图片状态是否开启
+				//开启的话对超出日期进行删除！
+			} else { 
+				//未开启保存图片功能
+			}
+			if ( Ini.IniAPI.GetPrivateProfileString("Status" , "SaveData" , "" , iniFilePath).Contains("true") ) {
+				//检测CSV文件夹是否创建（文件）
+			} else { 
+				//未开启数据保存功能
+			}
+			#endregion
 
+			#region ！！！检测TCP及串口是否开启并确认是否连接成功
+
+			#endregion
 		}
 		/// <summary>
 		/// 定时器检测客户端及PLC的连接状态
@@ -230,7 +247,7 @@ namespace 客户端 {
 		}
 
 		private void 通化讯设置ToolStripMenuItem_Click(object sender , EventArgs e) {
-			Forms.FormCommumicationSet formCommumicationSet = new Forms.FormCommumicationSet();
+			Forms.FormCommumicationSet formCommumicationSet = new Forms.FormCommumicationSet(iniFilePath);
 			formCommumicationSet.ShowDialog();
 
 			/*这里通讯设置进入窗体后需要加载ini文件中的通讯方式，同时可能进行修改*/
@@ -238,7 +255,7 @@ namespace 客户端 {
 		}
 
 		private void 保存图片ToolStripMenuItem_Click(object sender , EventArgs e) {
-			Forms.FormSaveSet formSaveSet = new Forms.FormSaveSet();
+			Forms.FormSaveSet formSaveSet = new Forms.FormSaveSet(iniFilePath);
 			formSaveSet.ShowDialog();
 		}
 	}
