@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace 客户端.Class {
-	internal class CogLoad {
+	public class CogLoad {
 		/// <summary>
 		/// 相机工具
 		/// </summary>
@@ -18,8 +18,8 @@ namespace 客户端.Class {
 		/// </summary>
 		public CogToolBlock ToolBlock { get; set; }
 
-		string CamPath = Directory.GetCurrentDirectory() + "\\vpp\\CamFifo.vpp";
-		string TBPath = Directory.GetCurrentDirectory() + "\\vpp\\TB.vpp";
+		public string CamPath = Directory.GetCurrentDirectory() + "\\vpp\\CamFifo.vpp";
+		public string TBPath = Directory.GetCurrentDirectory() + "\\vpp\\TB.vpp";
 
 		/// <summary>
 		/// 加载VPP
@@ -27,7 +27,6 @@ namespace 客户端.Class {
 		/// <returns>是否加载VPP成功</returns>
 		public bool LoadVpp() { 
 			CamTool	= CogSerializer.LoadObjectFromFile(CamPath) as CogAcqFifoTool;
-			
 			ToolBlock = CogSerializer.LoadObjectFromFile(TBPath) as CogToolBlock;
 			if ( CamTool == null || ToolBlock == null ) {
 				return false;

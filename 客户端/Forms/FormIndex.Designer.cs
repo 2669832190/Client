@@ -153,8 +153,9 @@
 			// 参数ToolStripMenuItem
 			// 
 			this.参数ToolStripMenuItem.Name = "参数ToolStripMenuItem";
-			this.参数ToolStripMenuItem.Size = new System.Drawing.Size(120, 24);
+			this.参数ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
 			this.参数ToolStripMenuItem.Text = "参数";
+			this.参数ToolStripMenuItem.Click += new System.EventHandler(this.参数ToolStripMenuItem_Click);
 			// 
 			// 其他设置ToolStripMenuItem
 			// 
@@ -169,14 +170,16 @@
 			// 通化讯设置ToolStripMenuItem
 			// 
 			this.通化讯设置ToolStripMenuItem.Name = "通化讯设置ToolStripMenuItem";
-			this.通化讯设置ToolStripMenuItem.Size = new System.Drawing.Size(162, 24);
+			this.通化讯设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
 			this.通化讯设置ToolStripMenuItem.Text = "通讯设置";
+			this.通化讯设置ToolStripMenuItem.Click += new System.EventHandler(this.通化讯设置ToolStripMenuItem_Click);
 			// 
 			// 保存图片ToolStripMenuItem
 			// 
 			this.保存图片ToolStripMenuItem.Name = "保存图片ToolStripMenuItem";
-			this.保存图片ToolStripMenuItem.Size = new System.Drawing.Size(162, 24);
+			this.保存图片ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
 			this.保存图片ToolStripMenuItem.Text = "保存图片";
+			this.保存图片ToolStripMenuItem.Click += new System.EventHandler(this.保存图片ToolStripMenuItem_Click);
 			// 
 			// 标定作业ToolStripMenuItem
 			// 

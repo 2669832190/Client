@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using 客户端.Forms;
 
 namespace 客户端 {
 	public partial class FormIndex : Form {
@@ -59,8 +60,11 @@ namespace 客户端 {
 		/// 接受数据线程
 		/// </summary>
 		public Thread t1;
-		
 
+		/// <summary>
+		/// VPP加载
+		/// </summary>
+		public CogLoad cogLoad = new CogLoad();
 
 		#endregion
 
@@ -193,7 +197,6 @@ namespace 客户端 {
 		/// </summary>
 		private void LoadVPP() { 
 			//相机连接，工具盒加载
-			CogLoad cogLoad = new CogLoad();
 			if ( !cogLoad.LoadVpp() ) {
 				RuningMessages.Items.Add("VPP加载失败！");
 			}
@@ -204,15 +207,39 @@ namespace 客户端 {
 		}
 
 		private void 相机1ToolStripMenuItem_Click(object sender , EventArgs e) {
-			Forms.FormCamSet formCamSet = new Forms.FormCamSet();
+			Forms.FormCamSet formCamSet = new Forms.FormCamSet(cogLoad);
 			formCamSet.ShowDialog();
 			//重新加载相机获取使用权限
+			cogLoad.LoadVpp();
 		}
 
 		private void 作业1ToolStripMenuItem_Click(object sender , EventArgs e) {
-			Forms.FormJobSet formJobSet = new Forms.FormJobSet();
+			Forms.FormJobSet formJobSet = new Forms.FormJobSet(cogLoad);
 			formJobSet.ShowDialog();
 			//重新加载作业获取使用权限
+			cogLoad.LoadVpp();
+		}
+
+		private void 参数ToolStripMenuItem_Click(object sender , EventArgs e) {
+			Forms.FormParameterSet formParameterSet = new Forms.FormParameterSet(iniFilePath);
+			formParameterSet.ShowDialog();
+			
+			/*这里参数窗口访问ini文件后ini文件是否可以被index继续访问？？？*/
+
+			
+		}
+
+		private void 通化讯设置ToolStripMenuItem_Click(object sender , EventArgs e) {
+			Forms.FormCommumicationSet formCommumicationSet = new Forms.FormCommumicationSet();
+			formCommumicationSet.ShowDialog();
+
+			/*这里通讯设置进入窗体后需要加载ini文件中的通讯方式，同时可能进行修改*/
+			/*当窗体被关闭时，需要注意 重新连接 ！！！*/
+		}
+
+		private void 保存图片ToolStripMenuItem_Click(object sender , EventArgs e) {
+			Forms.FormSaveSet formSaveSet = new Forms.FormSaveSet();
+			formSaveSet.ShowDialog();
 		}
 	}
 }

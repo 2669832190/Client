@@ -58,6 +58,7 @@
 			this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
 			this.保存ToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
 			this.保存ToolStripMenuItem.Text = "保存";
+			this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
 			// 
 			// 保存并推出ToolStripMenuItem
 			// 
@@ -65,6 +66,7 @@
 			this.保存并推出ToolStripMenuItem.Name = "保存并推出ToolStripMenuItem";
 			this.保存并推出ToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
 			this.保存并推出ToolStripMenuItem.Text = "保存并退出";
+			this.保存并推出ToolStripMenuItem.Click += new System.EventHandler(this.保存并推出ToolStripMenuItem_Click);
 			// 
 			// FormCamSet
 			// 
@@ -76,6 +78,8 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "FormCamSet";
 			this.Text = "FormCamSet";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCamSet_FormClosing);
+			this.Load += new System.EventHandler(this.FormCamSet_Load);
 			((System.ComponentModel.ISupportInitialize)(this.cogAcqFifoEditV21)).EndInit();
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
