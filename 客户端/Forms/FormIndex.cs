@@ -172,8 +172,19 @@ namespace 客户端 {
 					if ( len == 0 ) break;
 					string msg = Encoding.Default.GetString(buffer, 0, len);
 					AddRuningMessages("接收到数据 -> " + msg);
+
+					#region C1标定信号
+
+					if ( msg.Contains("C1") ) {
+						cameraCalibration.NPointFunc(msg);
+					} else if ( msg.Contains("RC") ) {
+						cameraCalibration.RotationFunc(msg);
+					}
+					#endregion
+
+
 				} catch ( Exception ex ) {
-					MessageBox.Show(ex.Message);
+					MessageBox.Show(ex.Message,"接收信息触发异常");
 				}
 			}
 		}
@@ -259,9 +270,10 @@ namespace 客户端 {
 			Forms.FormSaveSet formSaveSet = new Forms.FormSaveSet(iniFilePath);
 			formSaveSet.ShowDialog();
 		}
-
+		Forms.CameraCalibration cameraCalibration = new Forms.CameraCalibration();
 		private void 下相机标定ToolStripMenuItem_Click(object sender , EventArgs e) {
-
+			
+			cameraCalibration.ShowDialog();
 		}
 
 		private void 编辑标定作业ToolStripMenuItem_Click(object sender , EventArgs e) {

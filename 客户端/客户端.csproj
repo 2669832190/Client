@@ -394,8 +394,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\CalibNpoint.cs" />
     <Compile Include="Class\CogLoad.cs" />
     <Compile Include="Class\IniAPI.cs" />
+    <Compile Include="Class\Vision.cs" />
     <Compile Include="Forms\CameraCalibration.cs">
       <SubType>Form</SubType>
     </Compile>
