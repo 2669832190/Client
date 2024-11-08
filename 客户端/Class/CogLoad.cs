@@ -19,7 +19,7 @@ namespace 客户端.Class {
 		public CogToolBlock ToolBlock { get; set; }
 
 		public string CamPath = Directory.GetCurrentDirectory() + "\\vpp\\CamFifo.vpp";
-		public string TBPath = Directory.GetCurrentDirectory() + "\\vpp\\TB.vpp";
+		public string TBPath = Directory.GetCurrentDirectory() + "\\vpp\\ToolBlockSet.vpp";
 
 		/// <summary>
 		/// 加载VPP

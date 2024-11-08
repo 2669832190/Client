@@ -121,7 +121,7 @@
 			// 相机1ToolStripMenuItem
 			// 
 			this.相机1ToolStripMenuItem.Name = "相机1ToolStripMenuItem";
-			this.相机1ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+			this.相机1ToolStripMenuItem.Size = new System.Drawing.Size(131, 24);
 			this.相机1ToolStripMenuItem.Text = "相机1";
 			this.相机1ToolStripMenuItem.Click += new System.EventHandler(this.相机1ToolStripMenuItem_Click);
 			// 
@@ -153,7 +153,7 @@
 			// 参数ToolStripMenuItem
 			// 
 			this.参数ToolStripMenuItem.Name = "参数ToolStripMenuItem";
-			this.参数ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+			this.参数ToolStripMenuItem.Size = new System.Drawing.Size(120, 24);
 			this.参数ToolStripMenuItem.Text = "参数";
 			this.参数ToolStripMenuItem.Click += new System.EventHandler(this.参数ToolStripMenuItem_Click);
 			// 
@@ -170,14 +170,14 @@
 			// 通化讯设置ToolStripMenuItem
 			// 
 			this.通化讯设置ToolStripMenuItem.Name = "通化讯设置ToolStripMenuItem";
-			this.通化讯设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+			this.通化讯设置ToolStripMenuItem.Size = new System.Drawing.Size(162, 24);
 			this.通化讯设置ToolStripMenuItem.Text = "通讯设置";
 			this.通化讯设置ToolStripMenuItem.Click += new System.EventHandler(this.通化讯设置ToolStripMenuItem_Click);
 			// 
 			// 保存图片ToolStripMenuItem
 			// 
 			this.保存图片ToolStripMenuItem.Name = "保存图片ToolStripMenuItem";
-			this.保存图片ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+			this.保存图片ToolStripMenuItem.Size = new System.Drawing.Size(162, 24);
 			this.保存图片ToolStripMenuItem.Text = "保存图片";
 			this.保存图片ToolStripMenuItem.Click += new System.EventHandler(this.保存图片ToolStripMenuItem_Click);
 			// 
@@ -196,12 +196,14 @@
 			this.下相机标定ToolStripMenuItem.Name = "下相机标定ToolStripMenuItem";
 			this.下相机标定ToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
 			this.下相机标定ToolStripMenuItem.Text = "下相机标定";
+			this.下相机标定ToolStripMenuItem.Click += new System.EventHandler(this.下相机标定ToolStripMenuItem_Click);
 			// 
 			// 编辑标定作业ToolStripMenuItem
 			// 
 			this.编辑标定作业ToolStripMenuItem.Name = "编辑标定作业ToolStripMenuItem";
 			this.编辑标定作业ToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
 			this.编辑标定作业ToolStripMenuItem.Text = "编辑标定作业";
+			this.编辑标定作业ToolStripMenuItem.Click += new System.EventHandler(this.编辑标定作业ToolStripMenuItem_Click);
 			// 
 			// tableLayoutPanel1
 			// 

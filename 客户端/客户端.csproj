@@ -396,6 +396,12 @@
   <ItemGroup>
     <Compile Include="Class\CogLoad.cs" />
     <Compile Include="Class\IniAPI.cs" />
+    <Compile Include="Forms\CameraCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CameraCalibration.Designer.cs">
+      <DependentUpon>CameraCalibration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormCamSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -432,8 +438,17 @@
     <Compile Include="Forms\FormSaveSet.Designer.cs">
       <DependentUpon>FormSaveSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SetCameraCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetCameraCalibration.Designer.cs">
+      <DependentUpon>SetCameraCalibration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\CameraCalibration.resx">
+      <DependentUpon>CameraCalibration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCamSet.resx">
       <DependentUpon>FormCamSet.cs</DependentUpon>
     </EmbeddedResource>

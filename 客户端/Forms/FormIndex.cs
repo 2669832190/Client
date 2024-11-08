@@ -221,6 +221,7 @@ namespace 客户端 {
 
 		private void 退出ToolStripMenuItem_Click(object sender , EventArgs e) {
 			this.Close();
+			//释放资源！！！
 		}
 
 		private void 相机1ToolStripMenuItem_Click(object sender , EventArgs e) {
@@ -257,6 +258,14 @@ namespace 客户端 {
 		private void 保存图片ToolStripMenuItem_Click(object sender , EventArgs e) {
 			Forms.FormSaveSet formSaveSet = new Forms.FormSaveSet(iniFilePath);
 			formSaveSet.ShowDialog();
+		}
+
+		private void 下相机标定ToolStripMenuItem_Click(object sender , EventArgs e) {
+
+		}
+
+		private void 编辑标定作业ToolStripMenuItem_Click(object sender , EventArgs e) {
+
 		}
 	}
 }
