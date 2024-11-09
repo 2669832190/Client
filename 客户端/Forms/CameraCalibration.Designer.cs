@@ -29,19 +29,12 @@
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.dgvNPoint = new System.Windows.Forms.DataGridView();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.dataGridView2 = new System.Windows.Forms.DataGridView();
-			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.CenterOfRotation = new System.Windows.Forms.DataGridView();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.button1 = new System.Windows.Forms.Button();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.cogRecordDisplay1 = new Cognex.VisionPro.CogRecordDisplay();
 			this.RotationY = new System.Windows.Forms.Label();
 			this.RotationX = new System.Windows.Forms.Label();
 			this.RMS = new System.Windows.Forms.Label();
@@ -50,12 +43,19 @@
 			this.Scaling = new System.Windows.Forms.Label();
 			this.TranslationY = new System.Windows.Forms.Label();
 			this.TranslationX = new System.Windows.Forms.Label();
+			this.cogRecordDisplay1 = new Cognex.VisionPro.CogRecordDisplay();
+			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.WorldY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PixX = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvNPoint)).BeginInit();
 			this.groupBox2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.CenterOfRotation)).BeginInit();
 			this.groupBox3.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -110,7 +110,7 @@
 			// 
 			this.dgvNPoint.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvNPoint.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
+            this.PixX,
             this.Column2,
             this.Column3,
             this.Column4});
@@ -121,29 +121,9 @@
 			this.dgvNPoint.Size = new System.Drawing.Size(581, 329);
 			this.dgvNPoint.TabIndex = 0;
 			// 
-			// Column1
-			// 
-			this.Column1.HeaderText = "Column1";
-			this.Column1.Name = "Column1";
-			// 
-			// Column2
-			// 
-			this.Column2.HeaderText = "Column2";
-			this.Column2.Name = "Column2";
-			// 
-			// Column3
-			// 
-			this.Column3.HeaderText = "Column3";
-			this.Column3.Name = "Column3";
-			// 
-			// Column4
-			// 
-			this.Column4.HeaderText = "Column4";
-			this.Column4.Name = "Column4";
-			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.dataGridView2);
+			this.groupBox2.Controls.Add(this.CenterOfRotation);
 			this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox2.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.groupBox2.Location = new System.Drawing.Point(3, 372);
@@ -153,28 +133,18 @@
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "旋转中心";
 			// 
-			// dataGridView2
+			// CenterOfRotation
 			// 
-			this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.CenterOfRotation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.CenterOfRotation.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5,
-            this.Column6});
-			this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView2.Location = new System.Drawing.Point(3, 31);
-			this.dataGridView2.Name = "dataGridView2";
-			this.dataGridView2.RowTemplate.Height = 23;
-			this.dataGridView2.Size = new System.Drawing.Size(581, 214);
-			this.dataGridView2.TabIndex = 1;
-			// 
-			// Column5
-			// 
-			this.Column5.HeaderText = "Column5";
-			this.Column5.Name = "Column5";
-			// 
-			// Column6
-			// 
-			this.Column6.HeaderText = "Column6";
-			this.Column6.Name = "Column6";
+            this.WorldY});
+			this.CenterOfRotation.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.CenterOfRotation.Location = new System.Drawing.Point(3, 31);
+			this.CenterOfRotation.Name = "CenterOfRotation";
+			this.CenterOfRotation.RowTemplate.Height = 23;
+			this.CenterOfRotation.Size = new System.Drawing.Size(581, 214);
+			this.CenterOfRotation.TabIndex = 1;
 			// 
 			// groupBox3
 			// 
@@ -231,6 +201,86 @@
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "标定结果";
 			// 
+			// RotationY
+			// 
+			this.RotationY.AutoSize = true;
+			this.RotationY.Font = new System.Drawing.Font("宋体", 15F);
+			this.RotationY.Location = new System.Drawing.Point(343, 243);
+			this.RotationY.Name = "RotationY";
+			this.RotationY.Size = new System.Drawing.Size(109, 20);
+			this.RotationY.TabIndex = 15;
+			this.RotationY.Text = "旋转中心Y:";
+			// 
+			// RotationX
+			// 
+			this.RotationX.AutoSize = true;
+			this.RotationX.Font = new System.Drawing.Font("宋体", 15F);
+			this.RotationX.Location = new System.Drawing.Point(50, 243);
+			this.RotationX.Name = "RotationX";
+			this.RotationX.Size = new System.Drawing.Size(109, 20);
+			this.RotationX.TabIndex = 14;
+			this.RotationX.Text = "旋转中心X:";
+			// 
+			// RMS
+			// 
+			this.RMS.AutoSize = true;
+			this.RMS.Font = new System.Drawing.Font("宋体", 15F);
+			this.RMS.Location = new System.Drawing.Point(423, 184);
+			this.RMS.Name = "RMS";
+			this.RMS.Size = new System.Drawing.Size(59, 20);
+			this.RMS.TabIndex = 13;
+			this.RMS.Text = "RMS：";
+			// 
+			// Skew
+			// 
+			this.Skew.AutoSize = true;
+			this.Skew.Font = new System.Drawing.Font("宋体", 15F);
+			this.Skew.Location = new System.Drawing.Point(423, 127);
+			this.Skew.Name = "Skew";
+			this.Skew.Size = new System.Drawing.Size(69, 20);
+			this.Skew.TabIndex = 12;
+			this.Skew.Text = "倾斜：";
+			// 
+			// Rotation
+			// 
+			this.Rotation.AutoSize = true;
+			this.Rotation.Font = new System.Drawing.Font("宋体", 15F);
+			this.Rotation.Location = new System.Drawing.Point(253, 184);
+			this.Rotation.Name = "Rotation";
+			this.Rotation.Size = new System.Drawing.Size(69, 20);
+			this.Rotation.TabIndex = 11;
+			this.Rotation.Text = "旋转：";
+			// 
+			// Scaling
+			// 
+			this.Scaling.AutoSize = true;
+			this.Scaling.Font = new System.Drawing.Font("宋体", 15F);
+			this.Scaling.Location = new System.Drawing.Point(253, 127);
+			this.Scaling.Name = "Scaling";
+			this.Scaling.Size = new System.Drawing.Size(69, 20);
+			this.Scaling.TabIndex = 10;
+			this.Scaling.Text = "缩放：";
+			// 
+			// TranslationY
+			// 
+			this.TranslationY.AutoSize = true;
+			this.TranslationY.Font = new System.Drawing.Font("宋体", 15F);
+			this.TranslationY.Location = new System.Drawing.Point(80, 184);
+			this.TranslationY.Name = "TranslationY";
+			this.TranslationY.Size = new System.Drawing.Size(79, 20);
+			this.TranslationY.TabIndex = 9;
+			this.TranslationY.Text = "平移Y：";
+			// 
+			// TranslationX
+			// 
+			this.TranslationX.AutoSize = true;
+			this.TranslationX.Font = new System.Drawing.Font("宋体", 15F);
+			this.TranslationX.Location = new System.Drawing.Point(80, 127);
+			this.TranslationX.Name = "TranslationX";
+			this.TranslationX.Size = new System.Drawing.Size(79, 20);
+			this.TranslationX.TabIndex = 8;
+			this.TranslationX.Text = "平移X：";
+			// 
 			// cogRecordDisplay1
 			// 
 			this.cogRecordDisplay1.ColorMapLowerClipColor = System.Drawing.Color.Black;
@@ -249,85 +299,35 @@
 			this.cogRecordDisplay1.Size = new System.Drawing.Size(588, 374);
 			this.cogRecordDisplay1.TabIndex = 1;
 			// 
-			// RotationY
+			// Column5
 			// 
-			this.RotationY.AutoSize = true;
-			this.RotationY.Font = new System.Drawing.Font("宋体", 15F);
-			this.RotationY.Location = new System.Drawing.Point(356, 220);
-			this.RotationY.Name = "RotationY";
-			this.RotationY.Size = new System.Drawing.Size(109, 20);
-			this.RotationY.TabIndex = 15;
-			this.RotationY.Text = "旋转中心Y:";
+			this.Column5.HeaderText = "WorldX";
+			this.Column5.Name = "Column5";
 			// 
-			// RotationX
+			// WorldY
 			// 
-			this.RotationX.AutoSize = true;
-			this.RotationX.Font = new System.Drawing.Font("宋体", 15F);
-			this.RotationX.Location = new System.Drawing.Point(114, 228);
-			this.RotationX.Name = "RotationX";
-			this.RotationX.Size = new System.Drawing.Size(109, 20);
-			this.RotationX.TabIndex = 14;
-			this.RotationX.Text = "旋转中心X:";
+			this.WorldY.HeaderText = "WorldY";
+			this.WorldY.Name = "WorldY";
 			// 
-			// RMS
+			// PixX
 			// 
-			this.RMS.AutoSize = true;
-			this.RMS.Font = new System.Drawing.Font("宋体", 15F);
-			this.RMS.Location = new System.Drawing.Point(406, 171);
-			this.RMS.Name = "RMS";
-			this.RMS.Size = new System.Drawing.Size(59, 20);
-			this.RMS.TabIndex = 13;
-			this.RMS.Text = "RMS：";
+			this.PixX.HeaderText = "PixX";
+			this.PixX.Name = "PixX";
 			// 
-			// Skew
+			// Column2
 			// 
-			this.Skew.AutoSize = true;
-			this.Skew.Font = new System.Drawing.Font("宋体", 15F);
-			this.Skew.Location = new System.Drawing.Point(406, 127);
-			this.Skew.Name = "Skew";
-			this.Skew.Size = new System.Drawing.Size(69, 20);
-			this.Skew.TabIndex = 12;
-			this.Skew.Text = "倾斜：";
+			this.Column2.HeaderText = "PixY";
+			this.Column2.Name = "Column2";
 			// 
-			// Rotation
+			// Column3
 			// 
-			this.Rotation.AutoSize = true;
-			this.Rotation.Font = new System.Drawing.Font("宋体", 15F);
-			this.Rotation.Location = new System.Drawing.Point(263, 171);
-			this.Rotation.Name = "Rotation";
-			this.Rotation.Size = new System.Drawing.Size(69, 20);
-			this.Rotation.TabIndex = 11;
-			this.Rotation.Text = "旋转：";
+			this.Column3.HeaderText = "WorldX";
+			this.Column3.Name = "Column3";
 			// 
-			// Scaling
+			// Column4
 			// 
-			this.Scaling.AutoSize = true;
-			this.Scaling.Font = new System.Drawing.Font("宋体", 15F);
-			this.Scaling.Location = new System.Drawing.Point(263, 127);
-			this.Scaling.Name = "Scaling";
-			this.Scaling.Size = new System.Drawing.Size(69, 20);
-			this.Scaling.TabIndex = 10;
-			this.Scaling.Text = "缩放：";
-			// 
-			// TranslationY
-			// 
-			this.TranslationY.AutoSize = true;
-			this.TranslationY.Font = new System.Drawing.Font("宋体", 15F);
-			this.TranslationY.Location = new System.Drawing.Point(114, 171);
-			this.TranslationY.Name = "TranslationY";
-			this.TranslationY.Size = new System.Drawing.Size(79, 20);
-			this.TranslationY.TabIndex = 9;
-			this.TranslationY.Text = "平移Y：";
-			// 
-			// TranslationX
-			// 
-			this.TranslationX.AutoSize = true;
-			this.TranslationX.Font = new System.Drawing.Font("宋体", 15F);
-			this.TranslationX.Location = new System.Drawing.Point(114, 127);
-			this.TranslationX.Name = "TranslationX";
-			this.TranslationX.Size = new System.Drawing.Size(79, 20);
-			this.TranslationX.TabIndex = 8;
-			this.TranslationX.Text = "平移X：";
+			this.Column4.HeaderText = "WorldY";
+			this.Column4.Name = "Column4";
 			// 
 			// CameraCalibration
 			// 
@@ -343,7 +343,7 @@
 			this.groupBox1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvNPoint)).EndInit();
 			this.groupBox2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.CenterOfRotation)).EndInit();
 			this.groupBox3.ResumeLayout(false);
 			this.tableLayoutPanel3.ResumeLayout(false);
 			this.groupBox4.ResumeLayout(false);
@@ -363,13 +363,7 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.DataGridView dgvNPoint;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-		private System.Windows.Forms.DataGridView dataGridView2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+		private System.Windows.Forms.DataGridView CenterOfRotation;
 		private System.Windows.Forms.Button button1;
 		private Cognex.VisionPro.CogRecordDisplay cogRecordDisplay1;
 		private System.Windows.Forms.Label RotationY;
@@ -380,5 +374,11 @@
 		private System.Windows.Forms.Label Scaling;
 		private System.Windows.Forms.Label TranslationY;
 		private System.Windows.Forms.Label TranslationX;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn WorldY;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PixX;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 	}
 }

@@ -13,6 +13,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using 客户端.Forms;
+using Cognex.VisionPro;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace 客户端 {
 	public partial class FormIndex : Form {
@@ -65,6 +67,8 @@ namespace 客户端 {
 		/// VPP加载
 		/// </summary>
 		public CogLoad cogLoad = new CogLoad();
+
+		List<IndexDataTable> list = new List<IndexDataTable>();
 
 		#endregion
 
@@ -174,6 +178,72 @@ namespace 客户端 {
 					AddRuningMessages("接收到数据 -> " + msg);
 
 					#region C1标定信号
+					if ( msg.Contains("T1") ) {
+
+						#region 开始拍照
+
+						cogLoad.CamTool.Run();
+						AddRuningMessages("开始拍照！");
+						cogRecordDisplay1.Image = cogLoad.CamTool.OutputImage;
+						cogRecordDisplay1.Fit();
+						AddRuningMessages("拍照完成！");
+						#endregion
+						#region 开始检测
+						AddRuningMessages("开始检测！");
+						cogLoad.ToolBlock.Inputs["InputImg"].Value = cogLoad.CamTool.OutputImage;
+						cogLoad.ToolBlock.Run();
+
+						//这里总数加加？？？
+
+						if ( cogLoad.ToolBlock.RunStatus.Result == CogToolResultConstants.Accept ) {
+							//label1.Text = "Width:" + loadVpp.ToolBlock.Outputs["Width"].Value.ToString();
+							//有结果的时候进行总数加加
+
+							#region MyRegion
+							/*
+							SumShow.Text = Ini.IniAPI.GetPrivateProfileString("Statistics" , "Sum" , "" , iniFilePath + "\\init.ini");
+							GoodProductsShow.Text = Ini.IniAPI.GetPrivateProfileString("Statistics" , "GoodProducts" , "" , iniFilePath + "\\init.ini");
+							Double Yield = Double.Parse(GoodProductsShow.Text) / Double.Parse(SumShow.Text) * 100;
+							YieldNum.Text = Yield.ToString() == "NaN" ? "0" + "%" : Yield.ToString() + "%";
+							*/
+							#endregion
+
+							int Sum = Ini.IniAPI.GetPrivateProfileInt("Statistics" , "Sum" , -1 , iniFilePath + "\\init.ini");
+							Sum++;
+							Ini.IniAPI.INIWriteValue(iniFilePath + "\\init.ini" , "Statistics" , "Sum" , Sum.ToString());
+							int GP = Ini.IniAPI.GetPrivateProfileInt("Statistics" , "GoodProducts" , -1 , iniFilePath + "\\init.ini");
+							bool Isok = false;
+							if ( (Double)cogLoad.ToolBlock.Outputs["Width"].Value >= 240 ) {
+								//🆗
+								AddRuningMessages("检测完成：OK！");
+								Isok = true;
+								GP++;
+								Ini.IniAPI.INIWriteValue(iniFilePath + "\\init.ini" , "Statistics" , "GoodProducts" , GP.ToString());
+							} else {
+								//NG
+								AddRuningMessages("检测完成：NG！！！");
+								
+							}
+							IndexDataTable indexDataTable = new IndexDataTable();
+							indexDataTable.dateTime = DateTime.Now;
+							indexDataTable.width = double.Parse(cogLoad.ToolBlock.Outputs["Width"].Value.ToString());
+							indexDataTable.data = Isok ? "OK" : "NG";
+							list.Add(indexDataTable);
+							UpdataDgv();
+							UpNum(Sum , GP,Isok);
+
+
+						} else {
+							MessageBox.Show("运行失败，请检查相机配置，或产品位置！");
+							AddRuningMessages("运行失败，请检查相机配置，或产品位置！");
+						}
+
+
+						cogRecordDisplay2.Record = cogLoad.ToolBlock.CreateLastRunRecord().SubRecords["CogPMAlignTool1.InputImage"];
+						cogRecordDisplay2.Fit();
+						#endregion
+
+					}
 
 					if ( msg.Contains("C1") ) {
 						cameraCalibration.NPointFunc(msg);
@@ -188,7 +258,29 @@ namespace 客户端 {
 				}
 			}
 		}
+		/// <summary>
+		/// 更新总计，良品，良率！！！
+		/// </summary>
+		private void UpNum(int Sum,int GP,bool Isok) {
+			Invoke(new MethodInvoker(() => {
+				if ( Isok ) {
+					IsOK.Text = "OK";
+					IsOK.BackColor = Color.Green;
+				} else {
+					IsOK.Text = "NG";
+					IsOK.BackColor = Color.Red;
+				}
 
+				//良率计算
+				Double YieldNumm = Math.Round((Double.Parse(GP.ToString()) /Double.Parse(Sum.ToString())),2)  * 100;
+				//Ini.IniAPI.INIWriteValue(iniFilePath , "Statistics" , "Yield" , YieldNumm.ToString());
+				//Ini.IniAPI.GetPrivateProfileDouble("lv","Yield",-1,loadVpp.iniFilePath);
+
+				SumShow.Text = Ini.IniAPI.GetPrivateProfileInt("Statistics" , "Sum" , -1 , iniFilePath + "\\init.ini").ToString();
+				GoodProductsShow.Text = Ini.IniAPI.GetPrivateProfileInt("Statistics" , "GoodProducts" , -1 , iniFilePath + "\\init.ini").ToString();
+				YieldNum.Text = YieldNumm.ToString() + "%";
+			}));
+		}
 
 		/// <summary>
 		/// RuningMessages添加信息导致线程跨越！！！
@@ -229,6 +321,20 @@ namespace 客户端 {
 				RuningMessages.Items.Add("VPP加载失败！");
 			}
 		}
+		/// <summary>
+		/// 更新表格数据
+		/// </summary>
+		private void UpdataDgv() {
+			Invoke(new MethodInvoker(() => {
+				//清空
+				datatable.Columns.Clear();
+				//绑定数据源
+				datatable.DataSource = null;
+				datatable.DataSource = list;
+			}));
+		}
+
+		#region 菜单栏设置！！！
 
 		private void 退出ToolStripMenuItem_Click(object sender , EventArgs e) {
 			this.Close();
@@ -252,10 +358,10 @@ namespace 客户端 {
 		private void 参数ToolStripMenuItem_Click(object sender , EventArgs e) {
 			Forms.FormParameterSet formParameterSet = new Forms.FormParameterSet(iniFilePath);
 			formParameterSet.ShowDialog();
-			
+
 			/*这里参数窗口访问ini文件后ini文件是否可以被index继续访问？？？*/
 
-			
+
 		}
 
 		private void 通化讯设置ToolStripMenuItem_Click(object sender , EventArgs e) {
@@ -270,14 +376,32 @@ namespace 客户端 {
 			Forms.FormSaveSet formSaveSet = new Forms.FormSaveSet(iniFilePath);
 			formSaveSet.ShowDialog();
 		}
+
+
 		Forms.CameraCalibration cameraCalibration = new Forms.CameraCalibration();
 		private void 下相机标定ToolStripMenuItem_Click(object sender , EventArgs e) {
-			
+
 			cameraCalibration.ShowDialog();
 		}
 
 		private void 编辑标定作业ToolStripMenuItem_Click(object sender , EventArgs e) {
 
 		}
+		#endregion
+
 	}
 }
+
+
+
+/*
+ 串口通讯开启...
+ 保存图片
+ 保存图片文件夹创建
+ 保存数据
+ 自动删除
+ 相机标定！！！保存
+ 相机标定保存后的数据进行保存到对应ini文件
+ 编辑相机标定窗口
+ 退出程序时的相机释放
+ */

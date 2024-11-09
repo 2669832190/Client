@@ -29,6 +29,7 @@ namespace 客户端.Forms {
 		int index = 0;
 
 		List<CalibNpoint> list = new List<CalibNpoint>();
+		List<CenterOfRotationPoint> listWorld = new List<CenterOfRotationPoint>();
 
 		//主程序接收到C1数据以后 会调用这个方法
 		//9点标定
@@ -59,8 +60,8 @@ namespace 客户端.Forms {
 
 			//把坐标封装起来
 			CalibNpoint calibNpoint = new CalibNpoint();
-			calibNpoint.pixX = pixX;
-			calibNpoint.pixY = pixY;
+			calibNpoint.PixX = pixX;
+			calibNpoint.PixY = pixY;
 			calibNpoint.WorldX = worldX;
 			calibNpoint.WorldY = worldY;
 			//保存到list
@@ -77,14 +78,11 @@ namespace 客户端.Forms {
 				CogCalibNPointToNPointTool NPointTool = Vision.NPointTB.Tools["CogCalibNPointToNPointTool1"] as CogCalibNPointToNPointTool;
 				//填入数据
 				for ( int i = 0; i < list.Count; i++ ) {
-					NPointTool.Calibration.AddPointPair(list[i].pixX , list[i].pixY , list[i].WorldX , list[i].WorldY);
+					NPointTool.Calibration.AddPointPair(list[i].PixX , list[i].PixY , list[i].WorldX , list[i].WorldY);
 				}
 				//校准
 				NPointTool.Calibration.Calibrate();
-
-
 				UpdataResult(NPointTool);
-
 			}
 		}
 
@@ -116,8 +114,22 @@ namespace 客户端.Forms {
 			cogFitCircleTool.RunParams.AddPoint(pmaTool.Results[0].GetPose().TranslationX , pmaTool.Results[0].GetPose().TranslationY);
 			RCindex++;
 
+			double WorldX = cogFitCircleTool.Result.GetCircle().CenterX;
+			double WorldY = cogFitCircleTool.Result.GetCircle().CenterY;
+
+			CenterOfRotationPoint centerOfRotationPoint = new CenterOfRotationPoint();
+			centerOfRotationPoint.WorldX = WorldX;
+			centerOfRotationPoint.WorldY = WorldY;
+
+			listWorld.Add(centerOfRotationPoint);
+			UpdataCenterOfRotation();
+
+
 			if ( RCindex == 3 ) {
 				cogFitCircleTool.Run();
+
+				
+
 				//拿到旋转中心XY
 				//cogFitCircleTool.Result.GetCircle().CenterX;
 				//cogFitCircleTool.Result.GetCircle().CenterY;
@@ -138,6 +150,15 @@ namespace 客户端.Forms {
 				dgvNPoint.DataSource = list;
 			}));
 		}
+		private void UpdataCenterOfRotation() {
+			Invoke(new MethodInvoker(() => {
+				//清空
+				CenterOfRotation.Columns.Clear();
+				//绑定数据源
+				CenterOfRotation.DataSource = null;
+				CenterOfRotation.DataSource = listWorld;
+			}));
+		}
 		private void UpdataResult(CogCalibNPointToNPointTool NPointTool) {
 			Invoke(new MethodInvoker(() => {
 				CogTransform2DLinear cogTransform2DLinear = (CogTransform2DLinear)NPointTool.Calibration.GetComputedUncalibratedFromCalibratedTransform();
@@ -145,15 +166,15 @@ namespace 客户端.Forms {
 				//修改窗体显示的结果
 				TranslationX.Text = "平移X : " + cogTransform2DLinear.TranslationX.ToString("0.00");
 				TranslationY.Text = "平移Y : " + cogTransform2DLinear.TranslationY.ToString("0.00");
-
-				RotationX.Text = "旋转中心X : " + cogTransform2DLinear.RotationX.ToString("0.00");
-				RotationY.Text = "旋转中心Y : " + cogTransform2DLinear.RotationY.ToString("0.00");
-
 				Scaling.Text = "缩放 : " + cogTransform2DLinear.Scaling.ToString("0.00");
-				Rotation.Text = "旋转 : " + cogTransform2DLinear.Rotation.ToString("0.00");
 
-				Skew.Text = "倾斜 : " + cogTransform2DLinear.Skew.ToString("0.00");
-				RMS.Text = "RMS : " + NPointTool.Calibration.ComputedRMSError.ToString("0.00");
+				RotationX.Text = "旋转中心X : " + string.Format("{0:E2}" , cogTransform2DLinear.RotationX);
+				RotationY.Text = "旋转中心Y : " + string.Format("{0:E2}" , cogTransform2DLinear.RotationY);
+
+				Rotation.Text = "旋转 : " + string.Format("{0:E2}" , cogTransform2DLinear.Rotation);
+
+				Skew.Text = "倾斜 : " + string.Format("{0:E2}" , cogTransform2DLinear.Skew);
+				RMS.Text = "RMS : " + string.Format("{0:E2}" , NPointTool.Calibration.ComputedRMSError);
 			}));
 		}
 	}

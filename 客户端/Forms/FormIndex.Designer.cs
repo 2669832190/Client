@@ -43,7 +43,7 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel3 = new System.Windows.Forms.Panel();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.datatable = new System.Windows.Forms.DataGridView();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.cogRecordDisplay2 = new Cognex.VisionPro.CogRecordDisplay();
 			this.cogRecordDisplay1 = new Cognex.VisionPro.CogRecordDisplay();
@@ -64,11 +64,14 @@
 			this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PLCStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
+			this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.data = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.panel3.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.datatable)).BeginInit();
 			this.panel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.cogRecordDisplay2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.cogRecordDisplay1)).BeginInit();
@@ -137,7 +140,7 @@
 			// 作业1ToolStripMenuItem
 			// 
 			this.作业1ToolStripMenuItem.Name = "作业1ToolStripMenuItem";
-			this.作业1ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+			this.作业1ToolStripMenuItem.Size = new System.Drawing.Size(131, 24);
 			this.作业1ToolStripMenuItem.Text = "作业1";
 			this.作业1ToolStripMenuItem.Click += new System.EventHandler(this.作业1ToolStripMenuItem_Click);
 			// 
@@ -232,22 +235,26 @@
 			// 
 			// panel3
 			// 
-			this.panel3.Controls.Add(this.dataGridView1);
+			this.panel3.Controls.Add(this.datatable);
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panel3.Location = new System.Drawing.Point(0, 721);
 			this.panel3.Name = "panel3";
 			this.panel3.Size = new System.Drawing.Size(1343, 346);
 			this.panel3.TabIndex = 1;
 			// 
-			// dataGridView1
+			// datatable
 			// 
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.RowTemplate.Height = 23;
-			this.dataGridView1.Size = new System.Drawing.Size(1343, 346);
-			this.dataGridView1.TabIndex = 0;
+			this.datatable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.datatable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.time,
+            this.data,
+            this.result});
+			this.datatable.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.datatable.Location = new System.Drawing.Point(0, 0);
+			this.datatable.Name = "datatable";
+			this.datatable.RowTemplate.Height = 23;
+			this.datatable.Size = new System.Drawing.Size(1343, 346);
+			this.datatable.TabIndex = 0;
 			// 
 			// panel2
 			// 
@@ -458,6 +465,21 @@
 			this.timer1.Interval = 1000;
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
+			// time
+			// 
+			this.time.HeaderText = "时间";
+			this.time.Name = "time";
+			// 
+			// data
+			// 
+			this.data.HeaderText = "数据";
+			this.data.Name = "data";
+			// 
+			// result
+			// 
+			this.result.HeaderText = "结果";
+			this.result.Name = "result";
+			// 
 			// FormIndex
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -475,7 +497,7 @@
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.datatable)).EndInit();
 			this.panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.cogRecordDisplay2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.cogRecordDisplay1)).EndInit();
@@ -508,7 +530,7 @@
 		private System.Windows.Forms.Timer timer1;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Panel panel3;
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridView datatable;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.Panel panel4;
 		private System.Windows.Forms.GroupBox groupBox1;
@@ -531,6 +553,9 @@
 		private System.Windows.Forms.ToolStripMenuItem 下相机标定ToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem 编辑标定作业ToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem 保存图片ToolStripMenuItem;
+		private System.Windows.Forms.DataGridViewTextBoxColumn time;
+		private System.Windows.Forms.DataGridViewTextBoxColumn data;
+		private System.Windows.Forms.DataGridViewTextBoxColumn result;
 	}
 }
 
