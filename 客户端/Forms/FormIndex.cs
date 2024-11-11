@@ -70,6 +70,10 @@ namespace 客户端 {
 
 		List<IndexDataTable> list = new List<IndexDataTable>();
 
+		bool SavePic = false;
+		string Path = Directory.GetCurrentDirectory() + "\\img\\" + DateTime.Now.ToString("yyyy-MM-dd") + "_Former";
+		string path = Directory.GetCurrentDirectory() + "\\img\\" + DateTime.Now.ToString("yyyy-MM-dd") + "_New";
+
 		#endregion
 
 
@@ -105,15 +109,51 @@ namespace 客户端 {
 			#endregion
 
 			#region ！！！检测自动删除图片状态，保存图片，数据的状态及其目录的创建
-			if ( Ini.IniAPI.GetPrivateProfileString("Status" , "SavePicture" , "" , iniFilePath).Contains("true") ) {
+			 /*
+			 保存数据
+			 */
+			if ( Ini.IniAPI.GetPrivateProfileString("Status" , "SavePicture" , "" , iniFilePath + "\\init.ini").Contains("true") ) {
+				SavePic = true;
 				//检测保存图片的目录是否创建
+
+				#region 判断文件夹是否存在
+				
+				if ( !Directory.Exists(Path) ) {
+					//创建文件夹
+					try {
+						Directory.CreateDirectory(Path);
+					} catch ( Exception ex ) {
+					}
+				}
+				if ( !Directory.Exists(path) ) {
+					//创建文件夹
+					try {
+						Directory.CreateDirectory(path);
+					} catch ( Exception ex ) {
+					}
+				}
+				#endregion
+
 				//检测自动删除图片状态是否开启
-				//开启的话对超出日期进行删除！
+				if ( Ini.IniAPI.GetPrivateProfileString("Status", "AutoDeletion", "", iniFilePath + "\\init.ini").Contains("true") ) {
+					//对超出日期进行删除！
+					DeleterF(Path , Ini.IniAPI.GetPrivateProfileInt("Status", "AutoDeletionDay", 0 , iniFilePath + "\\init.ini"));
+					DeleterF(path , Ini.IniAPI.GetPrivateProfileInt("Status" , "AutoDeletionDay" , 0 , iniFilePath + "\\init.ini"));
+				}
+				
 			} else { 
 				//未开启保存图片功能
 			}
-			if ( Ini.IniAPI.GetPrivateProfileString("Status" , "SaveData" , "" , iniFilePath).Contains("true") ) {
+
+			//检测是否开启保存数据
+			if ( Ini.IniAPI.GetPrivateProfileString("Status" , "SaveData" , "" , iniFilePath + "\\init.ini").Contains("true") ) {
 				//检测CSV文件夹是否创建（文件）
+				if ( !File.Exists(Directory.GetCurrentDirectory() + "\\CSV\\data.csv") ) {
+					try {
+						File.Create(Directory.GetCurrentDirectory() + "\\CSV\\data.csv");
+					} catch ( Exception ex ) {
+					}
+				}
 			} else { 
 				//未开启数据保存功能
 			}
@@ -242,7 +282,16 @@ namespace 客户端 {
 						cogRecordDisplay2.Record = cogLoad.ToolBlock.CreateLastRunRecord().SubRecords["CogPMAlignTool1.InputImage"];
 						cogRecordDisplay2.Fit();
 						#endregion
-
+						#region 运行后保存图片
+						if ( SavePic ) {
+							int i = 0;
+							Bitmap BitMap = cogLoad.CamTool.OutputImage.ToBitmap();
+							BitMap.Save(Path + i + ".bmp" , System.Drawing.Imaging.ImageFormat.Bmp);
+							Bitmap bitmap = cogRecordDisplay2.CreateContentBitmap(Cognex.VisionPro.Display.CogDisplayContentBitmapConstants.Image) as Bitmap;
+							bitmap.Save(path + i + ".bmp" , System.Drawing.Imaging.ImageFormat.Bmp);
+						}
+						
+						#endregion
 					}
 
 					if ( msg.Contains("C1") ) {
@@ -334,6 +383,22 @@ namespace 客户端 {
 			}));
 		}
 
+		private void DeleterF(string Path , int Day) {
+			DirectoryInfo dir = new DirectoryInfo(Path);
+			if ( dir.Exists ) {
+				DirectoryInfo[] childs = dir.GetDirectories();
+				foreach ( DirectoryInfo child in childs ) {
+					//文件夹名转为时间格式
+					DateTime dt2 = DateTime.Parse(child.Name);
+					//时间差
+					TimeSpan ts = DateTime.Now - dt2;
+					if ( ts.Days >= Day )
+						child.Delete(true);
+				}
+			}
+
+		}
+
 		#region 菜单栏设置！！！
 
 		private void 退出ToolStripMenuItem_Click(object sender , EventArgs e) {
@@ -396,10 +461,8 @@ namespace 客户端 {
 
 /*
  串口通讯开启...
- 保存图片
- 保存图片文件夹创建
- 保存数据
- 自动删除
+ 
+
  相机标定！！！保存
  相机标定保存后的数据进行保存到对应ini文件
  编辑相机标定窗口
